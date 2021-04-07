@@ -16,5 +16,5 @@ clean:
 .PHONY: modules modules_install clean
 
 else
-	obj-m := hello.o
+	obj-m := basic_module.o
 endif
