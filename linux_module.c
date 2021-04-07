@@ -16,26 +16,22 @@
 * License, or (at your discretion) any later version.
 
 */
-
 #include <linux/module.h>
 #include <linux/init.h>
 
 static int __init hello_init(void)
-
 {
-  printk(KERN_INFO "hello world - first module \n");
-  return 0;
+	printk(KERN_INFO "Hello World!\n");
+	return 0; /* OK */
 }
-
 module_init(hello_init);
 
 static void __exit hello_exit(void)
 {
-  printk(KERN_ALERT "hello world - first module exit \n");
+	printk(KERN_INFO "Goodbye World!\n");
 }
- 
-module_exit(hello_init);
-MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Tushar Bhanarkar <tush.projects05@gmail.com>");
-MODULE_DESCRIPTION("\"Hello, world!\" minimal module"); 
+module_exit(hello_exit);
 
+MODULE_DESCRIPTION("Simple Kernel Module");
+MODULE_AUTHOR("Tushar Bhanarkar <tush-projects05@gmail.com>");
+MODULE_LICENSE("GPL");
