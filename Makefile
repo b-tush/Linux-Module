@@ -1,20 +1,19 @@
-ifeq ($(KERNELRELEASE),)
+obj-m := linux_module.o
 
-KERNELDIR := ~/linux-at91
-PWD := $(shell pwd)
+ARCH=arm
+CROSS_COMPILE=arm-linux-gnueabi
+KER_DIR=/home/tushar/delete_today/linux-at91
+HOST_KER_DIR=/lib/modules/$(shell uname -r)/build/
 
-modules:
-	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
 
-modules_install:
-	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules_install
-
+all:
+	make ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE)- -C $(KER_DIR) M=$(PWD) modules
+	
 clean:
-	rm -rf *.o *~ core .depend .*.cmd *.ko *.mod.c .tmp_versions \
-		modules.order Module.symvers
+	make ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE)- -C $(KER_DIR) M=$(PWD) clean
 
-.PHONY: modules modules_install clean
+help:
+	make ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE)- -C $(KER_DIR) M=$(PWD) help	
 
-else
-	obj-m := linux_module.o
-endif
+host:
+	make  -C $(HOST_KER_DIR) M=$(PWD) modules
